@@ -171,6 +171,14 @@
             SelectedItem="{Binding EmployeSelectionne}"
             Margin="214,605,477,184"
         />
+        <Label 
+            Content="{Binding ActiviteSelectionnee.Nom}" HorizontalAlignment="Left" 
+            Margin="550,618,0,0" VerticalAlignment="Top" 
+            Height="33" Width="300"/>
+        <Label 
+            Content="{Binding ActiviteSelectionnee.EmployeResponsable}" HorizontalAlignment="Left" 
+            Margin="550,678,0,0" VerticalAlignment="Top" 
+            Height="33" Width="300"/>
 
 
         <!-- TODO : Voir image campeurs.png pour une partie 

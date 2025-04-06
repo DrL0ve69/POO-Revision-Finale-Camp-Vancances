@@ -221,6 +221,7 @@ namespace POO_Revision_Finale_Camp_Vancances
                 ObservableCollection<Activite> activitesCopie = [.. Activites];
 
                 EmployeSelectionne.ActivitesEncadrees.Add(ActiviteSelectionnee);
+
                 Activites = activitesCopie;
                 ActiviteSelectionnee = null;
                 EmployeSelectionne = null;
