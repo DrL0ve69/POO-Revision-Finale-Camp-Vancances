@@ -1,0 +1,188 @@
+﻿<Window x:Class="POO_Revision_Finale_Camp_Vancances.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POO_Revision_Finale_Camp_Vancances"
+        mc:Ignorable="d"
+        Title="Camp de vancances" Height="800" Width="1000">
+    <!-- TODO : Ajouter le viewModel dans le contexte -->
+    <Window.DataContext>
+        <local:CampViewModel />
+    </Window.DataContext>
+    <Grid Margin="0,0,0,-118">
+        <!-- TODO : Afficher les détails du Camp : 
+        Nom et Lieu -->
+        <Label 
+            Content="{Binding Lieu}" 
+            HorizontalAlignment="Left" 
+            Margin="26,24,0,0" 
+            VerticalAlignment="Top" 
+            Width="66"/>
+        <Label 
+            Content="{Binding Nom}" 
+            HorizontalAlignment="Left" 
+            Margin="111,24,0,0" 
+            VerticalAlignment="Top" 
+            Width="114"/>
+        <!-- TODO : Afficher la liste de Campeurs et la liste 
+        d'activités -->
+        <DataGrid 
+            ItemsSource="{Binding Campeurs}"
+            SelectedItem="{Binding CampeurSelectionne}"
+            Margin="26,81,477,623"
+            AutoGenerateColumns="False"
+        >
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Nom" 
+                    Binding="{Binding Nom}" 
+                />
+                <DataGridTextColumn 
+                    Header="Prénom" 
+                    Binding="{Binding Prenom}" 
+                />
+                <DataGridTextColumn 
+                    Header="Groupe assigné" 
+                    Binding="{Binding GroupeAssigné}" 
+                />
+                <DataGridTextColumn 
+                    Header="Âge" 
+                    Binding="{Binding Age}" 
+                />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Activités:" FontWeight="Bold" />
+                        <ItemsControl ItemsSource="{Binding Activites}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Nom}" Margin="5" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+        <!-- TODO : Afficher un bouton pour permettre 
+        d'inscrire les campeurs aux activités.-->
+        <Button 
+            Content="Inscrire" 
+            HorizontalAlignment="Left" 
+            Margin="26,554,0,0" 
+            VerticalAlignment="Top" 
+            Width="165" 
+            Height="36"
+            Command="{Binding InscrireCommand}"
+        />
+        <!-- TODO : Afficher le nombre de Campeur vs la 
+        Capacité, ex 22/30 -->
+        <Label 
+            Content="Capacité maximale:" HorizontalAlignment="Left" 
+            Margin="26,604,0,0" VerticalAlignment="Top" 
+            Width="111"/>
+        <Label 
+            Content="{Binding CapaciteMax}" HorizontalAlignment="Left" 
+            Margin="168,604,0,0" VerticalAlignment="Top" 
+            Width="57"/>
+        <Label 
+            Content="Nombre inscrit(e)s" HorizontalAlignment="Left" 
+            Margin="26,636,0,0" VerticalAlignment="Top" 
+            Width="111"/>
+        <Label 
+            Content="{Binding Campeurs.Count}" HorizontalAlignment="Left" 
+            Margin="168,636,0,0" VerticalAlignment="Top" 
+            Width="57"/>
+        <DataGrid 
+            ItemsSource="{Binding Activites}"
+            SelectedItem="{Binding ActiviteSelectionnee}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            RenderTransformOrigin="0.488,0.702" 
+            Margin="25,324,479,358"
+        >
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Nom" 
+                    Binding="{Binding Nom}" 
+                />
+                <DataGridTextColumn 
+                    Header="Description" 
+                    Binding="{Binding Description}" 
+                />
+                <DataGridTextColumn 
+                    Header="Horaire" 
+                    Binding="{Binding Horaire}" 
+                />
+                <DataGridTemplateColumn Header="CampeursInscrits">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding CampeursInscrits}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding NomComplet}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn 
+                    Header="Employé responsable" 
+                    Binding="{Binding EmployeResponsable}"
+                />
+                
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Label 
+            Content="{Binding CampeurSelectionne.VoirActivites}" 
+            HorizontalAlignment="Left" Margin="550,107,0,0" 
+            VerticalAlignment="Top" Width="402" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+        />
+        <Label 
+            Content="Les activités inscrites au dossier de:" 
+            HorizontalAlignment="Left" 
+            Margin="550,63,0,0" 
+            VerticalAlignment="Top" 
+            Width="201"
+        />
+        <Label 
+            Content="{Binding CampeurSelectionne.NomComplet}" 
+            HorizontalAlignment="Left" 
+            Margin="770,63,0,0" 
+            VerticalAlignment="Top" 
+            Width="201"
+        />
+        <Button 
+            Content="Ajouter un Responsable" 
+            HorizontalAlignment="Left" 
+            Margin="214,554,0,0" 
+            VerticalAlignment="Top" 
+            Width="165" 
+            Height="36"
+            Command="{Binding AjoutResponsableCommand}"
+        />
+        <ListBox 
+            ItemsSource="{Binding ListeEmployes}"
+            SelectedItem="{Binding EmployeSelectionne}"
+            Margin="214,605,477,184"
+        />
+
+
+        <!-- TODO : Voir image campeurs.png pour une partie 
+        de l'interfce wpf attendu -->
+
+
+
+        <!-- TODO : Implémenter le binding sur tous les objets.-->
+
+        <!-- TODO : Version longue : ajouter tout autre 
+        éléments que vous voulez je vous suggère d'utiliser 
+        différents tab -->
+
+    </Grid>
+</Window>
