@@ -12,5 +12,9 @@ namespace POO_Revision_Finale_Camp_Vancances
         public string Prenom { get; set; }
         public int Age { get; set; }
         public string NomComplet => $"{Nom}, {Prenom}";
+        public override string ToString()
+        {
+            return NomComplet + $" Âge: {Age}ans";
+        }
     }
 }

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POO_Revision_Finale_Camp_Vancances"
         mc:Ignorable="d"
-        Title="Camp de vancances" Height="800" Width="1000">
+        Title="Camp de vancances" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
     <!-- TODO : Ajouter le viewModel dans le contexte -->
     <Window.DataContext>
         <local:CampViewModel />
     </Window.DataContext>
-    <Grid Margin="0,0,0,-118">
+    <Grid Margin="0,0,0,-6">
         <!-- TODO : Afficher les détails du Camp : 
         Nom et Lieu -->
         <Label 
@@ -30,7 +30,7 @@
         <DataGrid 
             ItemsSource="{Binding Campeurs}"
             SelectedItem="{Binding CampeurSelectionne}"
-            Margin="26,81,477,623"
+            Margin="26,75,455,498"
             AutoGenerateColumns="False"
         >
             <DataGrid.Columns>
@@ -102,7 +102,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             RenderTransformOrigin="0.488,0.702" 
-            Margin="25,324,479,358"
+            Margin="25,297,455,245"
         >
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -134,7 +134,7 @@
                     Header="Employé responsable" 
                     Binding="{Binding EmployeResponsable}"
                 />
-                
+
             </DataGrid.Columns>
 
         </DataGrid>
@@ -169,16 +169,20 @@
         <ListBox 
             ItemsSource="{Binding ListeEmployes}"
             SelectedItem="{Binding EmployeSelectionne}"
-            Margin="214,605,477,184"
+            Margin="214,605,477,10"
         />
         <Label 
             Content="{Binding ActiviteSelectionnee.Nom}" HorizontalAlignment="Left" 
-            Margin="550,618,0,0" VerticalAlignment="Top" 
+            Margin="550,297,0,0" VerticalAlignment="Top" 
             Height="33" Width="300"/>
         <Label 
             Content="{Binding ActiviteSelectionnee.EmployeResponsable}" HorizontalAlignment="Left" 
-            Margin="550,678,0,0" VerticalAlignment="Top" 
+            Margin="550,335,0,0" VerticalAlignment="Top" 
             Height="33" Width="300"/>
+        <ListBox
+            ItemsSource="{Binding ActiviteSelectionnee.CampeursInscrits}" 
+            Margin="550,395,142,272" 
+            d:ItemsSource="{d:SampleData ItemCount=3}"/>
 
 
         <!-- TODO : Voir image campeurs.png pour une partie 
