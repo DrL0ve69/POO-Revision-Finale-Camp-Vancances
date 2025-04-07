@@ -28,6 +28,25 @@ namespace POO_Revision_Finale_Camp_Vancances
                 OnPropertyChanged(nameof(NbInscrits));
             }
         }
+        public string NomEmploye { get; set; }
+        public string PrenomEmploye { get; set; }
+        public int AgeEmploye { get; set; }
+        public int ExperienceEmploye { get; set; }
+        public List<string> PostesDisponibles { get; set; } =
+        [
+            "Moniteur",
+            "Animateur"
+        ];
+        private string _posteSelectionne;
+        public string PosteSelectionne 
+        {
+            get => _posteSelectionne; 
+            set
+            {
+                _posteSelectionne = value;
+                OnPropertyChanged(nameof(PosteSelectionne));
+            }
+        }
         private ObservableCollection<Campeur> _campeurs;
         public ObservableCollection<Campeur> Campeurs 
         {
@@ -69,8 +88,8 @@ namespace POO_Revision_Finale_Camp_Vancances
                 OnPropertyChanged(nameof(CampeurSelectionne));
             }
         }
-        private List<Employe> _listeEmployes;
-        public List<Employe> ListeEmployes
+        private ObservableCollection<Employe> _listeEmployes;
+        public ObservableCollection<Employe> ListeEmployes
         {
             get => _listeEmployes;
             set
@@ -91,6 +110,7 @@ namespace POO_Revision_Finale_Camp_Vancances
         }
         public ICommand InscrireCommand { get; }
         public ICommand AjoutResponsableCommand { get; }
+        public ICommand AjouterEmployeCommand { get; }
         // TODO : Créer le constructeur du viewModel avec tout ce qui est nécessaire
         public CampViewModel()
         {
@@ -181,6 +201,7 @@ namespace POO_Revision_Finale_Camp_Vancances
             NbInscrits = Campeurs.Count;
             InscrireCommand = new RelayCommand(Inscrire, CanInscrire);
             AjoutResponsableCommand = new RelayCommand(AjouterResponsable, CanAjouterResponsable);
+            AjouterEmployeCommand = new RelayCommand(AjouterEmploye, CanAjouterEmploye);
         }
         // TODO : Gérer le bouton Inscription qui doit permettre d'inscrire les campeurs aux activités.
         // Lors de l'inscription, il doit y avoir des objets sélectionnés dans les 2 grilles 
@@ -230,6 +251,51 @@ namespace POO_Revision_Finale_Camp_Vancances
         private bool CanAjouterResponsable()
         {
             return ActiviteSelectionnee != null && EmployeSelectionne != null;
+        }
+
+        public void AjouterEmploye() 
+        {
+            if (PosteSelectionne == "Moniteur") 
+            {
+                Moniteur employeMoniteur = new Moniteur()
+                {
+                    Nom = NomEmploye,
+                    Prenom = PrenomEmploye,
+                    Age = AgeEmploye,
+                    Poste = PosteSelectionne,
+                    Experience = ExperienceEmploye
+                };
+                ListeEmployes.Add(employeMoniteur);
+            }
+            else if (PosteSelectionne == "Animateur")
+            {
+                Animateur employeAnimateur = new Animateur()
+                {
+                    Nom = NomEmploye,
+                    Prenom = PrenomEmploye,
+                    Age = AgeEmploye,
+                    Poste = PosteSelectionne,
+                    Experience = ExperienceEmploye
+                };
+                ListeEmployes.Add(employeAnimateur);
+            }
+            Employe employe = new Employe()
+            {
+                Nom = NomEmploye,
+                Prenom = PrenomEmploye,
+                Age = AgeEmploye,
+                Poste = PosteSelectionne,
+                Experience = ExperienceEmploye
+            };
+            
+        }
+        private bool CanAjouterEmploye()
+        {
+            // TODO : Vérifier si les champs sont valides
+            // TODO : Vérifier si l'employé n'est pas déjà dans la liste
+            
+            return !string.IsNullOrEmpty(PosteSelectionne) && !string.IsNullOrEmpty(NomEmploye) &&
+                !string.IsNullOrEmpty(PrenomEmploye) && AgeEmploye > 14 && AgeEmploye < 70;
         }
     }
 }

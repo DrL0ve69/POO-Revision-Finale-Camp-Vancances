@@ -30,7 +30,7 @@
         <DataGrid 
             ItemsSource="{Binding Campeurs}"
             SelectedItem="{Binding CampeurSelectionne}"
-            Margin="26,75,455,498"
+            Margin="26,75,455,561"
             AutoGenerateColumns="False"
         >
             <DataGrid.Columns>
@@ -72,7 +72,7 @@
         <Button 
             Content="Inscrire" 
             HorizontalAlignment="Left" 
-            Margin="26,554,0,0" 
+            Margin="26,473,0,0" 
             VerticalAlignment="Top" 
             Width="165" 
             Height="36"
@@ -82,19 +82,19 @@
         Capacité, ex 22/30 -->
         <Label 
             Content="Capacité maximale:" HorizontalAlignment="Left" 
-            Margin="26,604,0,0" VerticalAlignment="Top" 
+            Margin="26,523,0,0" VerticalAlignment="Top" 
             Width="111"/>
         <Label 
             Content="{Binding CapaciteMax}" HorizontalAlignment="Left" 
-            Margin="168,604,0,0" VerticalAlignment="Top" 
+            Margin="168,523,0,0" VerticalAlignment="Top" 
             Width="57"/>
         <Label 
             Content="Nombre inscrit(e)s" HorizontalAlignment="Left" 
-            Margin="26,636,0,0" VerticalAlignment="Top" 
+            Margin="26,555,0,0" VerticalAlignment="Top" 
             Width="111"/>
         <Label 
             Content="{Binding Campeurs.Count}" HorizontalAlignment="Left" 
-            Margin="168,636,0,0" VerticalAlignment="Top" 
+            Margin="168,555,0,0" VerticalAlignment="Top" 
             Width="57"/>
         <DataGrid 
             ItemsSource="{Binding Activites}"
@@ -102,7 +102,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             RenderTransformOrigin="0.488,0.702" 
-            Margin="25,297,455,245"
+            Margin="25,237,392,332"
         >
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -140,27 +140,27 @@
         </DataGrid>
         <Label 
             Content="{Binding CampeurSelectionne.VoirActivites}" 
-            HorizontalAlignment="Left" Margin="550,107,0,0" 
+            HorizontalAlignment="Left" Margin="562,107,0,0" 
             VerticalAlignment="Top" Width="402" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
         />
         <Label 
             Content="Les activités inscrites au dossier de:" 
             HorizontalAlignment="Left" 
-            Margin="550,63,0,0" 
+            Margin="562,63,0,0" 
             VerticalAlignment="Top" 
             Width="201"
         />
         <Label 
             Content="{Binding CampeurSelectionne.NomComplet}" 
             HorizontalAlignment="Left" 
-            Margin="770,63,0,0" 
+            Margin="782,63,0,0" 
             VerticalAlignment="Top" 
             Width="201"
         />
         <Button 
             Content="Ajouter un Responsable" 
             HorizontalAlignment="Left" 
-            Margin="214,554,0,0" 
+            Margin="214,473,0,0" 
             VerticalAlignment="Top" 
             Width="165" 
             Height="36"
@@ -169,20 +169,68 @@
         <ListBox 
             ItemsSource="{Binding ListeEmployes}"
             SelectedItem="{Binding EmployeSelectionne}"
-            Margin="214,605,477,10"
+            Margin="214,524,477,91"
         />
         <Label 
             Content="{Binding ActiviteSelectionnee.Nom}" HorizontalAlignment="Left" 
-            Margin="550,297,0,0" VerticalAlignment="Top" 
+            Margin="613,249,0,0" VerticalAlignment="Top" 
             Height="33" Width="300"/>
         <Label 
             Content="{Binding ActiviteSelectionnee.EmployeResponsable}" HorizontalAlignment="Left" 
-            Margin="550,335,0,0" VerticalAlignment="Top" 
+            Margin="613,287,0,0" VerticalAlignment="Top" 
             Height="33" Width="300"/>
         <ListBox
             ItemsSource="{Binding ActiviteSelectionnee.CampeursInscrits}" 
-            Margin="550,395,142,272" 
+            Margin="613,335,79,332" 
             d:ItemsSource="{d:SampleData ItemCount=3}"/>
+        <StackPanel Margin="550,472,0,10">
+            <Label Content="Formulaire ajout employé(e):" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Nom"/>
+            <TextBox 
+                Text="{Binding NomEmploye}" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                VerticalAlignment="Top" 
+                Width="200"/>
+
+            <Label Content="Prénom"/>
+            <TextBox 
+                Text="{Binding PrenomEmploye}" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                VerticalAlignment="Top" 
+                Width="200"/>
+
+            <Label Content="Age"/>
+            <TextBox 
+                Text="{Binding AgeEmploye}" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                VerticalAlignment="Top" 
+                Width="200"/>
+
+            <Label Content="Année(s) expérience"/>
+            <TextBox 
+                Text="{Binding ExperienceEmploye}" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                VerticalAlignment="Top" 
+                Width="200"/>
+            <Label Content="Poste(s) disponible(s)"/>
+            <ComboBox
+                ItemsSource="{Binding PostesDisponibles}"
+                SelectedItem="{Binding PosteSelectionne}"
+                Width="200" Height="32" 
+                HorizontalAlignment="Left"/>
+            <Button 
+                Content="Ajouter" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0" 
+                Width="200" 
+                Height="27"
+                Command="{Binding AjouterEmployeCommand}"
+                />
+        </StackPanel>
 
 
         <!-- TODO : Voir image campeurs.png pour une partie 
